@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="background"></div>
+<div class="auth-container">
+    <div class="auth-card">
+        <h1 class="auth-title">Welcome Back</h1>
+        <p class="auth-subtitle">Sign in to continue</p>
+
+        {% if error %}
+        <div class="error-box">
+            <ul>
+                <li>{{ error }}</li>
+            </ul>
+        </div>
+        {% endif %}
+
+        <form id="loginForm" method="POST" action="{{ url_for('login') }}" novalidate>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="{{ email }}" placeholder="Enter your email" autocomplete="off">
+                <span class="input-feedback" id="emailFeedback"></span>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="off">
+                    <button type="button" class="toggle-password" data-target="password">Show</button>
+                </div>
+                <span class="input-feedback" id="passwordFeedback"></span>
+            </div>
+
+            <button type="submit" class="auth-button" id="submitButton">Sign In</button>
+        </form>
+
+        <p class="auth-footer">Don't have an account? <a href="{{ url_for('register') }}">Create one</a></p>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

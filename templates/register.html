@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="background"></div>
+<div class="auth-container">
+    <div class="auth-card">
+        <h1 class="auth-title">Create Account</h1>
+        <p class="auth-subtitle">Sign up to get started</p>
+
+        {% if errors %}
+        <div class="error-box">
+            <ul>
+                {% for error in errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <form id="registerForm" method="POST" action="{{ url_for('register') }}" novalidate>
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" value="{{ username }}" placeholder="Enter your username" autocomplete="off">
+                <span class="input-feedback" id="usernameFeedback"></span>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="{{ email }}" placeholder="Enter your email" autocomplete="off">
+                <span class="input-feedback" id="emailFeedback"></span>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" name="password" placeholder="Create a password" autocomplete="off">
+                    <button type="button" class="toggle-password" data-target="password">Show</button>
+                </div>
+                <div class="strength-bar">
+                    <div class="strength-bar-fill" id="strengthFill"></div>
+                </div>
+                <span class="input-feedback" id="strengthText"></span>
+            </div>
+
+            <div class="input-group">
+                <label for="confirm_password">Confirm Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" autocomplete="off">
+                    <button type="button" class="toggle-password" data-target="confirm_password">Show</button>
+                </div>
+                <span class="input-feedback" id="confirmFeedback"></span>
+            </div>
+
+            <button type="submit" class="auth-button" id="submitButton" disabled>Create Account</button>
+        </form>
+
+        <p class="auth-footer">Already have an account? <a href="{{ url_for('login') }}">Sign in</a></p>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
